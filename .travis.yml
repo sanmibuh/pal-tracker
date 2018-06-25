@@ -4,8 +4,7 @@ notifications:
   email: false
 env:
   - RELEASE_TAG="release-$TRAVIS_BUILD_NUMBER"
-if: tag IS blank
-
+if: tag IS blank AND branch = master
 
 jobs:
   include:
