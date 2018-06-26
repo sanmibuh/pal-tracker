@@ -33,19 +33,24 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
 
   @Override
   public TimeEntry create(final TimeEntry timeEntry) {
-    KeyHolder keyHolder = new GeneratedKeyHolder();
-    final String sql = "INSERT INTO TIME_ENTRIES(PROJECT_ID, USER_ID, 'DATE', HOURS) VALUES(?, ?, ?, ?)";
-    jdbcTemplate.update(
-      connection -> {
-        PreparedStatement ps = connection.prepareStatement(sql, RETURN_GENERATED_KEYS);
-        ps.setLong(1, timeEntry.getProjectId());
-        ps.setLong(2, timeEntry.getUserId());
-        ps.setDate(3, Date.valueOf(timeEntry.getDate()));
-        ps.setInt(4, timeEntry.getHours());
-        return ps;
-      },
-      keyHolder);
-    return find(keyHolder.getKey().longValue());
+    KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+
+    jdbcTemplate.update(connection -> {
+      PreparedStatement statement = connection.prepareStatement(
+        "INSERT INTO time_entries (project_id, user_id, date, hours) " +
+          "VALUES (?, ?, ?, ?)",
+        RETURN_GENERATED_KEYS
+      );
+
+      statement.setLong(1, timeEntry.getProjectId());
+      statement.setLong(2, timeEntry.getUserId());
+      statement.setDate(3, Date.valueOf(timeEntry.getDate()));
+      statement.setInt(4, timeEntry.getHours());
+
+      return statement;
+    }, generatedKeyHolder);
+
+    return find(generatedKeyHolder.getKey().longValue());
   }
 
   @Override
