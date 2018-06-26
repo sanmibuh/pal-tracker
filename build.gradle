@@ -1,7 +1,12 @@
 plugins {
     id 'java'
+    id 'io.franzbecker.gradle-lombok' version '1.14'
     id 'org.springframework.boot' version '1.5.9.RELEASE'
-    id 'net.ltgt.apt' version '0.10'
+}
+
+lombok {
+    version = '1.18.0'
+    sha256 = ''
 }
 
 repositories {
@@ -11,9 +16,6 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.1")
-
-    compileOnly 'org.projectlombok:lombok:1.18.0'
-    apt "org.projectlombok:lombok:1.18.0"
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
