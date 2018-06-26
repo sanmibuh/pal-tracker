@@ -13,11 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-@Ignore
 public class JdbcTimeEntryRepositoryTest {
     private TimeEntryRepository subject;
     private JdbcTemplate jdbcTemplate;
