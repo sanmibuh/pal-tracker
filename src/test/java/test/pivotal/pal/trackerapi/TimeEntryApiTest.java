@@ -67,10 +67,7 @@ public class TimeEntryApiTest {
     public void testRead() throws Exception {
         Long id = createTimeEntry();
 
-
         ResponseEntity<String> readResponse = this.restTemplate.getForEntity("/time-entries/" + id, String.class);
-
-        System.out.println(readResponse.getBody());
 
         assertThat(readResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         DocumentContext readJson = parse(readResponse.getBody());
