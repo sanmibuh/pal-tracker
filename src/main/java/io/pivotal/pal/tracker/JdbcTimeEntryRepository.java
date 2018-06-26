@@ -34,7 +34,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
   @Override
   public TimeEntry create(final TimeEntry timeEntry) {
     KeyHolder keyHolder = new GeneratedKeyHolder();
-    final String sql = "INSERT INTO TIME_ENTRIES(PROJECT_ID, USER_ID, DATE, HOURS) VALUES(?, ?, ?, ?)";
+    final String sql = "INSERT INTO TIME_ENTRIES(PROJECT_ID, USER_ID, 'DATE', HOURS) VALUES(?, ?, ?, ?)";
     jdbcTemplate.update(
       connection -> {
         PreparedStatement ps = connection.prepareStatement(sql, RETURN_GENERATED_KEYS);
