@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '1.5.9.RELEASE'
+    id 'net.ltgt.apt' version '0.10'
 }
 
 repositories {
@@ -9,6 +10,10 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.1")
+
+    compileOnly 'org.projectlombok:lombok:1.18.0'
+    apt "org.projectlombok:lombok:1.18.0"
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
